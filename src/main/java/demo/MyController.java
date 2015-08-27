@@ -16,8 +16,8 @@ public class MyController implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Calling the service directly");
-        System.out.println(myService.getURLResponse("test"));
-        System.out.println(myService.getURLResponse("test"));
+        System.out.println(myService.getURLResponse("http://test.local/"));
+        System.out.println(myService.getURLResponse("http://test.local/"));
 
         System.out.println("Calling the service from another object with the dependency passed in.");
         ObjectThatCallsService objectThatCallsService = new ObjectThatCallsService(myService);
@@ -30,7 +30,7 @@ public class MyController implements CommandLineRunner {
         finCalcFga.testService();
 
         System.out.println("Demo where calling a public @Cachable method within the class it is defined won't use the cache");
-        myService.callCachedMethodInternally();
-        myService.callCachedMethodInternally();
+        System.out.println(myService.callCachedMethodInternally());
+        System.out.println(myService.callCachedMethodInternally());
     }
 }

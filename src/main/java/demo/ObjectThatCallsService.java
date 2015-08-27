@@ -11,6 +11,6 @@ public class ObjectThatCallsService {
     }
 
     public void testService() {
-        System.out.println(myService.getURLResponse("test"));
+        System.out.println(myService.getURLResponse("http://test.local/"));
     }
 }

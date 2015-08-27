@@ -11,7 +11,7 @@ public class MyService {
     @Cacheable(value="demoCache", key="#url")
     public String getURLResponse(String url) {
         System.out.println("This should only happen once!");
-        return "Balls";
+        return "Success";
     }
 
     public ObjectThatCallsService createFga() {
@@ -25,6 +25,6 @@ public class MyService {
      */
     public String callCachedMethodInternally() {
         System.out.println("This won't work because Spring AOP requires the @Cachable method to be called externally for the annotation to be picked up");
-        return getURLResponse("test");
+        return getURLResponse("http://test.local/");
     }
 }
