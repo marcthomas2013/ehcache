@@ -25,7 +25,7 @@ public class MyController implements CommandLineRunner {
         objectThatCallsService.testService();
 
         System.out.println("Calling the service from another object, with the dependency passed in as this, demonstrating that this doesn't work.");
-        ObjectThatCallsService finCalcFga = myService.createFga();
+        ObjectThatCallsService finCalcFga = myService.createObjectThatCallsService();
         finCalcFga.testService();
         finCalcFga.testService();
 

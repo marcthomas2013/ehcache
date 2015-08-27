@@ -14,7 +14,7 @@ public class MyService {
         return "Success";
     }
 
-    public ObjectThatCallsService createFga() {
+    public ObjectThatCallsService createObjectThatCallsService() {
         return new ObjectThatCallsService(this);
     }
 
