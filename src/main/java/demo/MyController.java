@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 
 /**
  * Created by marc.thomas on 26/08/2015.
+ *
+ * Blog article http://mtdevuk.com/2015/08/27/cachable-usage-and-gotchas/
  */
 @Controller
 public class MyController implements CommandLineRunner {
@@ -15,20 +17,36 @@ public class MyController implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        callServiceDirect();
+
+        callFromObjectWithDependencyPassedIn();
+
+        callFromObjectCreatedByTheService();
+
+        callingCacheMethodFromWithinService();
+    }
+
+    private void callServiceDirect() {
         System.out.println("Calling the service directly");
         System.out.println(myService.getURLResponse("http://test.local/"));
         System.out.println(myService.getURLResponse("http://test.local/"));
+    }
 
+    private void callFromObjectWithDependencyPassedIn() {
         System.out.println("Calling the service from another object with the dependency passed in.");
         ObjectThatCallsService objectThatCallsService = new ObjectThatCallsService(myService);
         objectThatCallsService.testService();
         objectThatCallsService.testService();
+    }
 
+    private void callFromObjectCreatedByTheService() {
         System.out.println("Calling the service from another object, with the dependency passed in as this, demonstrating that this doesn't work.");
         ObjectThatCallsService finCalcFga = myService.createObjectThatCallsService();
         finCalcFga.testService();
         finCalcFga.testService();
+    }
 
+    private void callingCacheMethodFromWithinService() {
         System.out.println("Demo where calling a public @Cachable method within the class it is defined won't use the cache");
         System.out.println(myService.callCachedMethodInternally());
         System.out.println(myService.callCachedMethodInternally());
