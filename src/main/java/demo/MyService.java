@@ -14,8 +14,24 @@ public class MyService {
         return "Success";
     }
 
+    @Cacheable(value="demoCache", key="#url")
+    private String privateGetURLResponse(String url) {
+        System.out.println("This should only happen once!");
+        return "Success";
+    }
+
     public ObjectThatCallsService createObjectThatCallsService() {
         return new ObjectThatCallsService(this);
+    }
+
+    /**
+     * This method demostrates that because we are using SpringAOP in this application the
+     * @Cachable annotation isn't picked
+     * @return
+     */
+    public String callPrivateCachedMethod() {
+        System.out.println("This won't work because Spring AOP requires the @Cachable method to be called externally for the annotation to be picked up");
+        return privateGetURLResponse("http://test.local/");
     }
 
     /**
